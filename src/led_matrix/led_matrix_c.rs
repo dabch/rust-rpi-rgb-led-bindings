@@ -1267,7 +1267,7 @@ extern "C" {
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
-pub struct RGBLedMatrix {
+pub struct LedMatrix {
     _unused: [u8; 0],
 }
 #[repr(C)]
@@ -1286,7 +1286,7 @@ pub struct LedFont {
 #[doc = " should zero out this struct before setting anything."]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
-pub struct RGBLedMatrixOptions {
+pub struct LedMatrixOptions {
     pub hardware_mapping: *const ::std::os::raw::c_char,
     pub rows: ::std::os::raw::c_int,
     pub cols: ::std::os::raw::c_int,
@@ -1306,185 +1306,185 @@ pub struct RGBLedMatrixOptions {
     pub __bindgen_padding_0: [u8; 3usize],
 }
 #[test]
-fn bindgen_test_layout_RGBLedMatrixOptions() {
+fn bindgen_test_layout_LedMatrixOptions() {
     assert_eq!(
-        ::std::mem::size_of::<RGBLedMatrixOptions>(),
+        ::std::mem::size_of::<LedMatrixOptions>(),
         64usize,
-        concat!("Size of: ", stringify!(RGBLedMatrixOptions))
+        concat!("Size of: ", stringify!(LedMatrixOptions))
     );
     assert_eq!(
-        ::std::mem::align_of::<RGBLedMatrixOptions>(),
+        ::std::mem::align_of::<LedMatrixOptions>(),
         4usize,
-        concat!("Alignment of ", stringify!(RGBLedMatrixOptions))
+        concat!("Alignment of ", stringify!(LedMatrixOptions))
     );
     assert_eq!(
         unsafe {
-            &(*(::std::ptr::null::<RGBLedMatrixOptions>())).hardware_mapping as *const _ as usize
+            &(*(::std::ptr::null::<LedMatrixOptions>())).hardware_mapping as *const _ as usize
         },
         0usize,
         concat!(
             "Offset of field: ",
-            stringify!(RGBLedMatrixOptions),
+            stringify!(LedMatrixOptions),
             "::",
             stringify!(hardware_mapping)
         )
     );
     assert_eq!(
-        unsafe { &(*(::std::ptr::null::<RGBLedMatrixOptions>())).rows as *const _ as usize },
+        unsafe { &(*(::std::ptr::null::<LedMatrixOptions>())).rows as *const _ as usize },
         4usize,
         concat!(
             "Offset of field: ",
-            stringify!(RGBLedMatrixOptions),
+            stringify!(LedMatrixOptions),
             "::",
             stringify!(rows)
         )
     );
     assert_eq!(
-        unsafe { &(*(::std::ptr::null::<RGBLedMatrixOptions>())).cols as *const _ as usize },
+        unsafe { &(*(::std::ptr::null::<LedMatrixOptions>())).cols as *const _ as usize },
         8usize,
         concat!(
             "Offset of field: ",
-            stringify!(RGBLedMatrixOptions),
+            stringify!(LedMatrixOptions),
             "::",
             stringify!(cols)
         )
     );
     assert_eq!(
         unsafe {
-            &(*(::std::ptr::null::<RGBLedMatrixOptions>())).chain_length as *const _ as usize
+            &(*(::std::ptr::null::<LedMatrixOptions>())).chain_length as *const _ as usize
         },
         12usize,
         concat!(
             "Offset of field: ",
-            stringify!(RGBLedMatrixOptions),
+            stringify!(LedMatrixOptions),
             "::",
             stringify!(chain_length)
         )
     );
     assert_eq!(
-        unsafe { &(*(::std::ptr::null::<RGBLedMatrixOptions>())).parallel as *const _ as usize },
+        unsafe { &(*(::std::ptr::null::<LedMatrixOptions>())).parallel as *const _ as usize },
         16usize,
         concat!(
             "Offset of field: ",
-            stringify!(RGBLedMatrixOptions),
+            stringify!(LedMatrixOptions),
             "::",
             stringify!(parallel)
         )
     );
     assert_eq!(
-        unsafe { &(*(::std::ptr::null::<RGBLedMatrixOptions>())).pwm_bits as *const _ as usize },
+        unsafe { &(*(::std::ptr::null::<LedMatrixOptions>())).pwm_bits as *const _ as usize },
         20usize,
         concat!(
             "Offset of field: ",
-            stringify!(RGBLedMatrixOptions),
+            stringify!(LedMatrixOptions),
             "::",
             stringify!(pwm_bits)
         )
     );
     assert_eq!(
         unsafe {
-            &(*(::std::ptr::null::<RGBLedMatrixOptions>())).pwm_lsb_nanoseconds as *const _ as usize
+            &(*(::std::ptr::null::<LedMatrixOptions>())).pwm_lsb_nanoseconds as *const _ as usize
         },
         24usize,
         concat!(
             "Offset of field: ",
-            stringify!(RGBLedMatrixOptions),
+            stringify!(LedMatrixOptions),
             "::",
             stringify!(pwm_lsb_nanoseconds)
         )
     );
     assert_eq!(
         unsafe {
-            &(*(::std::ptr::null::<RGBLedMatrixOptions>())).pwm_dither_bits as *const _ as usize
+            &(*(::std::ptr::null::<LedMatrixOptions>())).pwm_dither_bits as *const _ as usize
         },
         28usize,
         concat!(
             "Offset of field: ",
-            stringify!(RGBLedMatrixOptions),
+            stringify!(LedMatrixOptions),
             "::",
             stringify!(pwm_dither_bits)
         )
     );
     assert_eq!(
-        unsafe { &(*(::std::ptr::null::<RGBLedMatrixOptions>())).brightness as *const _ as usize },
+        unsafe { &(*(::std::ptr::null::<LedMatrixOptions>())).brightness as *const _ as usize },
         32usize,
         concat!(
             "Offset of field: ",
-            stringify!(RGBLedMatrixOptions),
+            stringify!(LedMatrixOptions),
             "::",
             stringify!(brightness)
         )
     );
     assert_eq!(
-        unsafe { &(*(::std::ptr::null::<RGBLedMatrixOptions>())).scan_mode as *const _ as usize },
+        unsafe { &(*(::std::ptr::null::<LedMatrixOptions>())).scan_mode as *const _ as usize },
         36usize,
         concat!(
             "Offset of field: ",
-            stringify!(RGBLedMatrixOptions),
+            stringify!(LedMatrixOptions),
             "::",
             stringify!(scan_mode)
         )
     );
     assert_eq!(
         unsafe {
-            &(*(::std::ptr::null::<RGBLedMatrixOptions>())).row_address_type as *const _ as usize
+            &(*(::std::ptr::null::<LedMatrixOptions>())).row_address_type as *const _ as usize
         },
         40usize,
         concat!(
             "Offset of field: ",
-            stringify!(RGBLedMatrixOptions),
+            stringify!(LedMatrixOptions),
             "::",
             stringify!(row_address_type)
         )
     );
     assert_eq!(
         unsafe {
-            &(*(::std::ptr::null::<RGBLedMatrixOptions>())).multiplexing as *const _ as usize
+            &(*(::std::ptr::null::<LedMatrixOptions>())).multiplexing as *const _ as usize
         },
         44usize,
         concat!(
             "Offset of field: ",
-            stringify!(RGBLedMatrixOptions),
+            stringify!(LedMatrixOptions),
             "::",
             stringify!(multiplexing)
         )
     );
     assert_eq!(
         unsafe {
-            &(*(::std::ptr::null::<RGBLedMatrixOptions>())).led_rgb_sequence as *const _ as usize
+            &(*(::std::ptr::null::<LedMatrixOptions>())).led_rgb_sequence as *const _ as usize
         },
         48usize,
         concat!(
             "Offset of field: ",
-            stringify!(RGBLedMatrixOptions),
+            stringify!(LedMatrixOptions),
             "::",
             stringify!(led_rgb_sequence)
         )
     );
     assert_eq!(
         unsafe {
-            &(*(::std::ptr::null::<RGBLedMatrixOptions>())).pixel_mapper_config as *const _ as usize
+            &(*(::std::ptr::null::<LedMatrixOptions>())).pixel_mapper_config as *const _ as usize
         },
         52usize,
         concat!(
             "Offset of field: ",
-            stringify!(RGBLedMatrixOptions),
+            stringify!(LedMatrixOptions),
             "::",
             stringify!(pixel_mapper_config)
         )
     );
     assert_eq!(
-        unsafe { &(*(::std::ptr::null::<RGBLedMatrixOptions>())).panel_type as *const _ as usize },
+        unsafe { &(*(::std::ptr::null::<LedMatrixOptions>())).panel_type as *const _ as usize },
         56usize,
         concat!(
             "Offset of field: ",
-            stringify!(RGBLedMatrixOptions),
+            stringify!(LedMatrixOptions),
             "::",
             stringify!(panel_type)
         )
     );
 }
-impl RGBLedMatrixOptions {
+impl LedMatrixOptions {
     #[inline]
     pub fn disable_hardware_pulsing(&self) -> ::std::os::raw::c_uint {
         unsafe { ::std::mem::transmute(self._bitfield_1.get(0usize, 1u8) as u32) }
@@ -1559,11 +1559,11 @@ extern "C" {
     #[doc = " Usage:"]
     #[doc = " ----------------"]
     #[doc = " int main(int argc, char **argv) {"]
-    #[doc = "   struct RGBLedMatrixOptions options;"]
+    #[doc = "   struct LedMatrixOptions options;"]
     #[doc = "   memset(&options, 0, sizeof(options));"]
     #[doc = "   options.rows = 32;            // You can set defaults if you want."]
     #[doc = "   options.chain_length = 1;"]
-    #[doc = "   struct RGBLedMatrix *matrix = led_matrix_create_from_options(&options,"]
+    #[doc = "   struct LedMatrix *matrix = led_matrix_create_from_options(&options,"]
     #[doc = "                                                                &argc, &argv);"]
     #[doc = "   if (matrix == NULL) {"]
     #[doc = "      led_matrix_print_flags(stderr);"]
@@ -1573,10 +1573,10 @@ extern "C" {
     #[doc = " }"]
     #[doc = " ----------------"]
     pub fn led_matrix_create_from_options(
-        options: *mut RGBLedMatrixOptions,
+        options: *mut LedMatrixOptions,
         argc: *mut ::std::os::raw::c_int,
         argv: *mut *mut *mut ::std::os::raw::c_char,
-    ) -> *mut RGBLedMatrix;
+    ) -> *mut LedMatrix;
 }
 extern "C" {
     #[doc = " Print available LED matrix options."]
@@ -1602,17 +1602,17 @@ extern "C" {
         rows: ::std::os::raw::c_int,
         chained: ::std::os::raw::c_int,
         parallel: ::std::os::raw::c_int,
-    ) -> *mut RGBLedMatrix;
+    ) -> *mut LedMatrix;
 }
 extern "C" {
     #[doc = " Stop matrix and free memory."]
     #[doc = " Always call before the end of the program to properly reset the hardware"]
-    pub fn led_matrix_delete(matrix: *mut RGBLedMatrix);
+    pub fn led_matrix_delete(matrix: *mut LedMatrix);
 }
 extern "C" {
     #[doc = " Get active canvas from LED matrix for you to draw on."]
     #[doc = " Ownership of returned pointer stays with the matrix, don't free()."]
-    pub fn led_matrix_get_canvas(matrix: *mut RGBLedMatrix) -> *mut LedCanvas;
+    pub fn led_matrix_get_canvas(matrix: *mut LedMatrix) -> *mut LedCanvas;
 }
 extern "C" {
     #[doc = " Return size of canvas."]
@@ -1644,7 +1644,7 @@ extern "C" {
 extern "C" {
     #[doc = " Create a new canvas to be used with led_matrix_swap_on_vsync()"]
     #[doc = " Ownership of returned pointer stays with the matrix, don't free()."]
-    pub fn led_matrix_create_offscreen_canvas(matrix: *mut RGBLedMatrix) -> *mut LedCanvas;
+    pub fn led_matrix_create_offscreen_canvas(matrix: *mut LedMatrix) -> *mut LedCanvas;
 }
 extern "C" {
     #[doc = " Swap the given canvas (created with create_offscreen_canvas) with the"]
@@ -1658,15 +1658,15 @@ extern "C" {
     #[doc = "   // The returned buffer, assigned to offscreen, is now the inactive buffer"]
     #[doc = "   // fill, then swap again."]
     pub fn led_matrix_swap_on_vsync(
-        matrix: *mut RGBLedMatrix,
+        matrix: *mut LedMatrix,
         canvas: *mut LedCanvas,
     ) -> *mut LedCanvas;
 }
 extern "C" {
-    pub fn led_matrix_get_brightness(matrix: *mut RGBLedMatrix) -> u8;
+    pub fn led_matrix_get_brightness(matrix: *mut LedMatrix) -> u8;
 }
 extern "C" {
-    pub fn led_matrix_set_brightness(matrix: *mut RGBLedMatrix, brightness: u8);
+    pub fn led_matrix_set_brightness(matrix: *mut LedMatrix, brightness: u8);
 }
 extern "C" {
     pub fn load_font(bdf_font_file: *const ::std::os::raw::c_char) -> *mut LedFont;
