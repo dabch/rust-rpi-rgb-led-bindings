@@ -3,6 +3,7 @@ mod led_matrix_c;
 pub use led_matrix_c::LedMatrixOptions;
 use led_matrix_c as c;
 use ::std::os::raw::{c_char, c_int};
+use ::std::ffi::CString;
 
 pub struct LedMatrix {
     handle: *mut c::LedMatrix,
@@ -11,6 +12,10 @@ pub struct LedMatrix {
 
 pub struct LedCanvas {
     handle: *mut c::LedCanvas,
+}
+
+pub struct LedFont {
+    handle: *mut c::LedFont,
 }
 
 impl LedMatrixOptions {
@@ -75,4 +80,40 @@ impl LedMatrix {
         LedCanvas { handle: new_handle }
     }
 
+    pub fn set_brightness(&self, brightness: u8) {
+        unsafe { c::led_matrix_set_brightness(self.handle, brightness); };
+    }
+
+    pub fn get_brightness(&self) -> u8 {
+        unsafe { c::led_matrix_get_brightness(self.handle) }
+    }
+
+}
+
+impl Drop for LedMatrix {
+    fn drop(&mut self) {
+        unsafe {
+            c::led_matrix_delete(self.handle);
+        }
+    }
+}
+
+impl LedCanvas {
+    pub fn draw_line(
+        &self,
+         x0: c_int, y0: c_int, x1: c_int, y1: c_int,
+         r: u8, g: u8, b: u8
+    ) {
+        unsafe {
+            c::draw_line(self.handle, x0, y0, x1, y1, r, g, b);
+        }
+    }
+
+    pub fn draw_text(&self, font: LedFont, x: c_int, y: c_int, r: u8, g: u8, b: u8, txt: String, kerning_offset: i32) -> c_int {
+        let txt = CString::new(txt).expect("Failed to convert to CString");
+        let txt_ptr = txt.as_ptr();
+        unsafe {
+            c::draw_text(self.handle, font.handle, x, y, r, g, b, txt_ptr, kerning_offset)
+        }
+    }
 }

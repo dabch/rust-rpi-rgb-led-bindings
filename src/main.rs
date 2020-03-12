@@ -16,8 +16,11 @@ fn main() {
 
     let mut canvas = matrix.canvas();
 
+    canvas.draw_line(0, 0, 63, 31, 255, 255, 255);
+
     println!("done!");
 
+    thread::sleep(time::Duration::from_millis(10000));
     
 
     /*unsafe {
@@ -30,7 +33,6 @@ fn main() {
         draw_line(canvas, 0, 0, 63, 31, 255, 255, 255);
     
 
-        thread::sleep(time::Duration::from_millis(10000));
 
         led_matrix_set_brightness(matrix, 100);
         draw_line(canvas, 0, 32, 63, 0, 255, 255, 255);
