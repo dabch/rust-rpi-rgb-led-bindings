@@ -16,7 +16,12 @@ fn main() {
 
     let mut canvas = matrix.canvas();
 
+    let (x, y) = canvas.get_size();
+    println!("canvas size: {} x {}", x, y);
+
     canvas.draw_line(0, 0, 63, 31, 255, 255, 255);
+
+    canvas.draw_circle(32, 16, 15, 0, 255, 0);
 
     println!("done!");
 

@@ -99,21 +99,82 @@ impl Drop for LedMatrix {
 }
 
 impl LedCanvas {
+    pub fn get_size(&self) -> (c_int, c_int) {
+        let mut x : c_int = -1;
+        let mut y : c_int = -1;
+        unsafe {
+            c::led_canvas_get_size(self.handle, &mut x as *mut c_int, &mut y as *mut c_int);
+        }
+        (x, y)
+    }
+
+    pub fn clear(&self) {
+        unsafe {
+            c::led_canvas_clear(self.handle);
+        }
+    }
+
+    pub fn fill(&self, r: u8, g: u8, b: u8) {
+        unsafe {
+            c::led_canvas_fill(self.handle, r, g, b);
+        }
+    }
+
+    pub fn set_pixel(
+        &self, 
+        x: c_int, y: c_int,
+        r: u8, g: u8, b: u8
+    ) {
+        unsafe {
+            c::led_canvas_set_pixel(self.handle, x, y, r, g, b);
+        }
+    }
+
     pub fn draw_line(
         &self,
-         x0: c_int, y0: c_int, x1: c_int, y1: c_int,
-         r: u8, g: u8, b: u8
+        x0: c_int, y0: c_int, x1: c_int, y1: c_int,
+        r: u8, g: u8, b: u8
     ) {
         unsafe {
             c::draw_line(self.handle, x0, y0, x1, y1, r, g, b);
         }
     }
 
-    pub fn draw_text(&self, font: LedFont, x: c_int, y: c_int, r: u8, g: u8, b: u8, txt: String, kerning_offset: i32) -> c_int {
-        let txt = CString::new(txt).expect("Failed to convert to CString");
-        let txt_ptr = txt.as_ptr();
+    pub fn draw_circle(
+        &self,
+        xx: c_int, y: c_int, radius: c_int,
+        r: u8, g: u8, b: u8
+    ) {
+        unsafe {
+            c::draw_circle(self.handle, xx, y, radius, r, g, b);
+        }
+    }
+
+    pub fn draw_text(
+        &self, font: LedFont,
+        x: c_int, y: c_int,
+        r: u8, g: u8, b: u8,
+        txt: String, kerning_offset: i32
+    ) -> c_int {
+        // separate lcoal variable needed because otherwise, txt_cstr is freed right away and ptr is dangling
+        let txt_cstr = CString::new(txt).expect("Failed to convert to CString");
+        let txt_ptr = txt_cstr.as_ptr();
         unsafe {
             c::draw_text(self.handle, font.handle, x, y, r, g, b, txt_ptr, kerning_offset)
+        }
+    }
+
+    pub fn vertical_draw_text(
+        &self, font: LedFont,
+        x: c_int, y: c_int,
+        r: u8, g: u8, b: u8,
+        txt: String, kerning_offset: i32
+    ) -> c_int {
+        // separate lcoal variable needed because otherwise, txt_cstr is freed right away and ptr is dangling
+        let txt_cstr = CString::new(txt).expect("Failed to convert to CString");
+        let txt_ptr = txt_cstr.as_ptr();
+        unsafe {
+            c::vertical_draw_text(self.handle, font.handle, x, y, r, g, b, txt_ptr, kerning_offset)
         }
     }
 }
