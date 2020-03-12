@@ -4,6 +4,7 @@ pub use led_matrix_c::LedMatrixOptions;
 use led_matrix_c as c;
 use ::std::os::raw::{c_char, c_int};
 use ::std::ffi::CString;
+use std::path::Path;
 
 pub struct LedMatrix {
     handle: *mut c::LedMatrix,
@@ -160,6 +161,7 @@ impl LedCanvas {
         let txt_cstr = CString::new(txt).expect("Failed to convert to CString");
         let txt_ptr = txt_cstr.as_ptr();
         unsafe {
+            println!("printing {:?} with font {:p}", txt_ptr, font.handle);
             c::draw_text(self.handle, font.handle, x, y, r, g, b, txt_ptr, kerning_offset)
         }
     }
@@ -176,5 +178,17 @@ impl LedCanvas {
         unsafe {
             c::vertical_draw_text(self.handle, font.handle, x, y, r, g, b, txt_ptr, kerning_offset)
         }
+    }
+}
+
+impl LedFont {
+    pub fn new(path: &Path) -> LedFont {
+        let c_str = CString::new(path.to_str().expect("path.to_str() failed")).expect("CString::new failed");
+        let ptr = c_str.as_ptr();
+        let handle = unsafe {
+            c::load_font(ptr)
+        };
+        println!("font: {:p}", handle);
+        LedFont { handle }
     }
 }

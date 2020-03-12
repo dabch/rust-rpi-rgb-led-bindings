@@ -4,7 +4,7 @@
 //include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 mod led_matrix;
 
-use led_matrix::{LedMatrixOptions, LedMatrix};
+use led_matrix::{LedMatrixOptions, LedMatrix, LedFont};
 use ::std::os::raw::{c_char, c_int};
 use std::{thread, time};
 
@@ -22,6 +22,11 @@ fn main() {
     canvas.draw_line(0, 0, 63, 31, 255, 255, 255);
 
     canvas.draw_circle(32, 16, 15, 0, 255, 0);
+
+    //let f = LedFont::new(std::path::Path::new("/fonts/4x6.bd"));
+    let f = LedFont::new(std::path::Path::new("fonts/4x6.bdf"));
+
+    canvas.draw_text(f, 0, 0, 0, 0, 255, "Hello World!".to_string(), 0);
 
     println!("done!");
 
