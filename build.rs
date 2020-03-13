@@ -1,4 +1,4 @@
-extern crate bindgen;
+//extern crate bindgen;
 
 use std::env;
 use std::path::PathBuf;
@@ -20,7 +20,7 @@ fn main() {
     // The bindgen::Builder is the main entry point
     // to bindgen, and lets you build up options for
     // the resulting bindings.
-    let bindings = bindgen::Builder::default()
+/*    let bindings = bindgen::Builder::default()
         // The input header we would like to generate
         // bindings for.
         .header("wrapper.h")
@@ -39,4 +39,5 @@ fn main() {
         .expect("Couldn't write bindings!");
 
     println!("{}", env::var("OUT_DIR").expect("fail"));
+    */
 }

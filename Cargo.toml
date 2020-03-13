@@ -1,12 +1,14 @@
 [package]
-name = "bind_test"
+name = "rust_rpi_led_matrix"
 version = "0.1.0"
-authors = ["pi"]
-edition = "2018"
+authors = ["Daniel Buecheler <dabch@posteo.de>"]
+edition = "2015"
+description = "Rust binding for hzeller's rpi-rgb-led-matrix library"
+license = "GPL-3.0-or-later"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[depenencies]
+[dependencies]
 
 [build-dependencies]
-bindgen = "0.53"
+#bindgen = "0.53"
