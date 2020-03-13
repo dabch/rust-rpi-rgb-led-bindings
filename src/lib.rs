@@ -1,3 +1,7 @@
+//! # rust_rpi_led-matrix
+//! This module contains safe wrappers for the unsafe ffi bindings to the actual
+//! C library functions. This is also the public interface of our bindings.
+
 mod led_matrix_c;
 
 pub use led_matrix_c::LedMatrixOptions;
@@ -8,7 +12,7 @@ use std::path::Path;
 
 pub struct LedMatrix {
     handle: *mut c::LedMatrix,
-    options: LedMatrixOptions,
+    _options: LedMatrixOptions,
 }
 
 pub struct LedCanvas {
@@ -24,7 +28,7 @@ impl LedMatrixOptions {
         LedMatrixOptions {
             hardware_mapping: 0 as *const c_char,
             rows: 32,
-            cols: 64,
+            cols: 32,
             chain_length: 0,
             parallel: 0,
             pwm_bits: 0,
@@ -47,29 +51,21 @@ impl LedMatrix {
     pub fn new(mut options: LedMatrixOptions) -> LedMatrix {
         let handle = 
             unsafe{
-                let ptr = c::led_matrix_create_from_options(&mut options as *mut c::LedMatrixOptions, 0 as *mut c_int, 0 as *mut*mut*mut c_char);
-                println!("matrix ptr: {:p}", ptr);
-                let mut m = *ptr;
-                //println!("matrix ptr II: {:p}", &mut m as *mut c::LedMatrix);
-                ptr
+                c::led_matrix_create_from_options(&mut options as *mut c::LedMatrixOptions, 0 as *mut c_int, 0 as *mut*mut*mut c_char)
             };
-        LedMatrix { handle, options }
+        LedMatrix { handle, _options: options }
     }
 
     pub fn canvas(&self) -> LedCanvas {
         let handle = unsafe {
-            println!("starting out, matrix: {:p}...", self.handle);
-            let ptr = c::led_matrix_get_canvas(self.handle);
-            println!("got ptr: {:p}", ptr);
-            ptr
+            c::led_matrix_get_canvas(self.handle)
         };
         LedCanvas { handle }
     }
 
     pub fn offscreen_canvas(&self) -> LedCanvas {
         let handle = unsafe {
-            let ptr = c::led_matrix_create_offscreen_canvas(self.handle);
-            ptr
+            c::led_matrix_create_offscreen_canvas(self.handle)
         };
         LedCanvas { handle }
     }
