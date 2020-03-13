@@ -1,6 +1,9 @@
 //! # rust_rpi_led-matrix
-//! This module contains safe wrappers for the unsafe ffi bindings to the actual
-//! C library functions. This is also the public interface of our bindings.
+//! This module contains bindings to [hzeller's rust-rpi-rgb-matrix
+//! library](https://github.com/hzeller/rpi-rgb-led-matrix).
+//! It provides safe wrappers around `bindgen`-generated ffi bindings. The `bindgen`-generated
+//! bindings are located in the module `rust_rpi_led_matrix::led_matrix_c` and not publicly
+//! available.
 
 mod led_matrix_c;
 
