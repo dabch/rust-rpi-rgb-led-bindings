@@ -18,6 +18,12 @@ fn main() {
 
     let (x, y) = canvas.get_size();
     println!("canvas size: {} x {}", x, y);
+    
+    canvas.fill(255, 255, 255);
+    
+    thread::sleep(time::Duration::from_millis(10000));
+
+    canvas.clear();
 
     canvas.draw_line(0, 0, 63, 31, 255, 255, 255);
 
@@ -26,7 +32,7 @@ fn main() {
     //let f = LedFont::new(std::path::Path::new("/fonts/4x6.bd"));
     let f = LedFont::new(std::path::Path::new("fonts/4x6.bdf"));
 
-    canvas.draw_text(f, 0, 0, 0, 0, 255, "Hello World!".to_string(), 0);
+    canvas.draw_text(f, 0, 10, 0, 0, 255, "Hello World!".to_string(), 0);
 
     println!("done!");
 
