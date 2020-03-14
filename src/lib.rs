@@ -1,4 +1,4 @@
-//! # rust_rpi_led-matrix
+//! # rust_rpi_led_matrix
 //! This module contains bindings to [hzeller's rust-rpi-rgb-matrix
 //! library](https://github.com/hzeller/rpi-rgb-led-matrix).
 //! It provides safe wrappers around `bindgen`-generated ffi bindings. The `bindgen`-generated
