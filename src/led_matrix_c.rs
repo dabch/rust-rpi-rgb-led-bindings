@@ -1549,6 +1549,7 @@ impl LedMatrixOptions {
         __bindgen_bitfield_unit
     }
 }
+#[link(name = "rgbmatrix")]
 extern "C" {
     #[doc = " Universal way to create and initialize a matrix."]
     #[doc = " The \"options\" struct (if not NULL) contains all default configuration values"]
@@ -1585,10 +1586,12 @@ extern "C" {
         argv: *mut *mut *mut ::std::os::raw::c_char,
     ) -> *mut LedMatrix;
 }
+#[link(name = "rgbmatrix")]
 extern "C" {
     #[doc = " Print available LED matrix options."]
     pub fn led_matrix_print_flags(out: *mut FILE);
 }
+#[link(name = "rgbmatrix")]
 extern "C" {
     #[doc = " Simple form of led_matrix_create_from_options() with just the few"]
     #[doc = " main options. Returns NULL if that was not possible."]
@@ -1611,16 +1614,19 @@ extern "C" {
         parallel: ::std::os::raw::c_int,
     ) -> *mut LedMatrix;
 }
+#[link(name = "rgbmatrix")]
 extern "C" {
     #[doc = " Stop matrix and free memory."]
     #[doc = " Always call before the end of the program to properly reset the hardware"]
     pub fn led_matrix_delete(matrix: *mut LedMatrix);
 }
+#[link(name = "rgbmatrix")]
 extern "C" {
     #[doc = " Get active canvas from LED matrix for you to draw on."]
     #[doc = " Ownership of returned pointer stays with the matrix, don't free()."]
     pub fn led_matrix_get_canvas(matrix: *mut LedMatrix) -> *mut LedCanvas;
 }
+#[link(name = "rgbmatrix")]
 extern "C" {
     #[doc = " Return size of canvas."]
     pub fn led_canvas_get_size(
@@ -1629,6 +1635,7 @@ extern "C" {
         height: *mut ::std::os::raw::c_int,
     );
 }
+#[link(name = "rgbmatrix")]
 extern "C" {
     #[doc = " Set pixel at (x, y) with color (r,g,b)."]
     pub fn led_canvas_set_pixel(
@@ -1640,19 +1647,23 @@ extern "C" {
         b: u8,
     );
 }
+#[link(name = "rgbmatrix")]
 extern "C" {
     #[doc = " Clear screen (black)."]
     pub fn led_canvas_clear(canvas: *mut LedCanvas);
 }
+#[link(name = "rgbmatrix")]
 extern "C" {
     #[doc = " Fill matrix with given color."]
     pub fn led_canvas_fill(canvas: *mut LedCanvas, r: u8, g: u8, b: u8);
 }
+#[link(name = "rgbmatrix")]
 extern "C" {
     #[doc = " Create a new canvas to be used with led_matrix_swap_on_vsync()"]
     #[doc = " Ownership of returned pointer stays with the matrix, don't free()."]
     pub fn led_matrix_create_offscreen_canvas(matrix: *mut LedMatrix) -> *mut LedCanvas;
 }
+#[link(name = "rgbmatrix")]
 extern "C" {
     #[doc = " Swap the given canvas (created with create_offscreen_canvas) with the"]
     #[doc = " currently active canvas on vsync (blocks until vsync is reached)."]
@@ -1669,18 +1680,23 @@ extern "C" {
         canvas: *mut LedCanvas,
     ) -> *mut LedCanvas;
 }
+#[link(name = "rgbmatrix")]
 extern "C" {
     pub fn led_matrix_get_brightness(matrix: *mut LedMatrix) -> u8;
 }
+#[link(name = "rgbmatrix")]
 extern "C" {
     pub fn led_matrix_set_brightness(matrix: *mut LedMatrix, brightness: u8);
 }
+#[link(name = "rgbmatrix")]
 extern "C" {
     pub fn load_font(bdf_font_file: *const ::std::os::raw::c_char) -> *mut LedFont;
 }
+#[link(name = "rgbmatrix")]
 extern "C" {
     pub fn delete_font(font: *mut LedFont);
 }
+#[link(name = "rgbmatrix")]
 extern "C" {
     pub fn draw_text(
         c: *mut LedCanvas,
@@ -1694,6 +1710,7 @@ extern "C" {
         kerning_offset: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
+#[link(name = "rgbmatrix")]
 extern "C" {
     pub fn vertical_draw_text(
         c: *mut LedCanvas,
@@ -1707,6 +1724,7 @@ extern "C" {
         kerning_offset: ::std::os::raw::c_int,
     ) -> ::std::os::raw::c_int;
 }
+#[link(name = "rgbmatrix")]
 extern "C" {
     pub fn draw_circle(
         c: *mut LedCanvas,
@@ -1718,6 +1736,7 @@ extern "C" {
         b: u8,
     );
 }
+#[link(name = "rgbmatrix")]
 extern "C" {
     pub fn draw_line(
         c: *mut LedCanvas,
