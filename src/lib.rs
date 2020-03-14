@@ -191,3 +191,11 @@ impl LedFont {
         LedFont { handle }
     }
 }
+
+impl Drop for LedFont {
+    fn drop(&mut self) {
+        unsafe {
+            c::delete_font(self.handle);
+        }
+    }
+}

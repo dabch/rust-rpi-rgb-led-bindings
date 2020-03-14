@@ -6,15 +6,15 @@
 fn main() {
     // Tell cargo to tell rustc to link the system bzip2
     // shared library.
-    println!("cargo:rustc-link-search=lib/");
-    println!("cargo:rustc-link-lib=rgbmatrix");
+    //println!("cargo:rustc-link-search=lib/");
+    //println!("cargo:rustc-link-lib=rgbmatrix");
     println!("cargo:rustc-link-lib=stdc++");
     println!("cargo:rustc-link-lib=rt");
     println!("cargo:rustc-link-lib=pthread");
     
     
     // Tell cargo to invalidate the built crate whenever the wrapper changes
-    println!("cargo:rerun-if-changed=wrapper.h");
+    //println!("cargo:rerun-if-changed=wrapper.h");
 
     
     // The bindgen::Builder is the main entry point
