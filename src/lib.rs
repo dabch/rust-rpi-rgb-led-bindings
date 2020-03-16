@@ -4,6 +4,7 @@
 //! It provides safe wrappers around `bindgen`-generated ffi bindings. The `bindgen`-generated
 //! bindings are located in the module `rust_rpi_led_matrix::led_matrix_c` and not publicly
 //! available.
+extern crate image;
 
 mod led_matrix_c;
 
@@ -178,6 +179,49 @@ impl LedCanvas {
             c::vertical_draw_text(self.handle, font.handle, x, y, r, g, b, txt_ptr, kerning_offset)
         }
     }
+
+    pub fn show_image(&self, dyn_img: &image::DynamicImage, x: i32, y: i32) {
+        println!("Hello show_image!");
+        match dyn_img {
+            image::DynamicImage::ImageRgb8(i)  => self.show_rgb8(i, x, y),
+            image::DynamicImage::ImageRgba8(i) => self.show_rgba8(i, x, y),
+            _ => panic!("Not implemented!"),
+        };
+    }
+
+
+    fn show_rgb8(&self, img: &image::RgbImage, x_: i32, y_: i32) {
+        let width = img.width();
+        let height = img.height();
+        for y in 0..height {
+            for x in 0..width {
+                let px = img.get_pixel(x, y);
+                let image::Rgb([r, g, b]) = px; 
+                self.set_pixel(x_ + x as i32, y_ + y as i32, *r, *g, *b);
+            }
+        }
+    }
+
+    fn show_rgba8(&self, img: &image::RgbaImage, x_: i32, y_: i32) {
+        let width = img.width();
+        let height = img.height();
+        for y in 0..height {
+            for x in 0..width {
+                let px = img.get_pixel(x, y);//.get(0);
+
+                let image::Rgba([r_raw, g_raw, b_raw, a]) = px; 
+                
+                // remap RGBA to RGB to prevent calling set_brightness. set_brightness is problematic
+                // because it requires a reference to the matrix, while set_pixel only needs a canvas.
+                // Therefore we'd not be able to make this a method of LedCanvas.
+                let r = if *a > 5 { (*r_raw as u32 * *a as u32 / 255) as u8 } else { 0 };
+                let g = if *a > 5 { (*g_raw as u32 * *a as u32 / 255) as u8 } else { 0 };
+                let b = if *a > 5 { (*b_raw as u32 * *a as u32 / 255) as u8 } else { 0 };
+
+                self.set_pixel(x_ + x as i32, y_ + y as i32, r, g, b);
+            }
+        }
+    }
 }
 
 impl LedFont {
@@ -199,3 +243,4 @@ impl Drop for LedFont {
         }
     }
 }
+
