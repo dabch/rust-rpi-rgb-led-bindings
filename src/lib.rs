@@ -152,7 +152,7 @@ impl LedCanvas {
     }
 
     pub fn draw_text(
-        &self, font: LedFont,
+        &self, font: &LedFont,
         x: c_int, y: c_int,
         r: u8, g: u8, b: u8,
         txt: String, kerning_offset: i32
@@ -167,7 +167,7 @@ impl LedCanvas {
     }
 
     pub fn vertical_draw_text(
-        &self, font: LedFont,
+        &self, font: &LedFont,
         x: c_int, y: c_int,
         r: u8, g: u8, b: u8,
         txt: String, kerning_offset: i32
@@ -214,9 +214,11 @@ impl LedCanvas {
                 // remap RGBA to RGB to prevent calling set_brightness. set_brightness is problematic
                 // because it requires a reference to the matrix, while set_pixel only needs a canvas.
                 // Therefore we'd not be able to make this a method of LedCanvas.
-                let r = if *a > 5 { (*r_raw as u32 * *a as u32 / 255) as u8 } else { 0 };
-                let g = if *a > 5 { (*g_raw as u32 * *a as u32 / 255) as u8 } else { 0 };
-                let b = if *a > 5 { (*b_raw as u32 * *a as u32 / 255) as u8 } else { 0 };
+                // also, only paint pixels that have at least a certain threshold of brightness.
+                // This prevents some weird artefacts
+                let r = if *a > 5 { (*r_raw as u32 * *a as u32 >> 8) as u8 } else { 0 };
+                let g = if *a > 5 { (*g_raw as u32 * *a as u32 >> 8) as u8 } else { 0 };
+                let b = if *a > 5 { (*b_raw as u32 * *a as u32 >> 8) as u8 } else { 0 };
 
                 self.set_pixel(x_ + x as i32, y_ + y as i32, r, g, b);
             }
